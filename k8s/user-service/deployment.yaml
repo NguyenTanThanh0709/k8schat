@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: nguyentanthanh0709/user-service:latest
+          ports:
+            - containerPort: 8180
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: DB_HOST
+              value: mysql
+            - name: DB_USERNAME
+              value: bookie
+            - name: DB_PASSWORD
+              value: bookie
+            - name: DB_DATABASE
+              value: bookie
